@@ -36,7 +36,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 18px 28px;
-      background: rgba(10, 10, 10, 0.65);
+      background: rgba(10, 10, 10, 0.68);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
@@ -62,12 +62,12 @@
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.05fr 0.95fr;
       align-items: center;
-      gap: 40px;
-      padding: 120px 60px 60px;
+      gap: 44px;
+      padding: 120px 60px 70px;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 30%),
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
         radial-gradient(circle at bottom right, rgba(230,200,79,0.10), transparent 28%),
         #0a0a0a;
     }
@@ -78,7 +78,7 @@
 
     .hero-text h1 {
       font-size: 76px;
-      line-height: 0.95;
+      line-height: 0.94;
       margin: 0 0 18px;
       letter-spacing: -0.05em;
       font-weight: 600;
@@ -87,13 +87,13 @@
     .subtitle {
       font-size: 22px;
       color: rgba(255,255,255,0.72);
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
 
     .hero-copy {
-      max-width: 700px;
+      max-width: 680px;
       font-size: 18px;
-      line-height: 1.7;
+      line-height: 1.72;
       color: rgba(255,255,255,0.78);
       margin-bottom: 34px;
     }
@@ -115,7 +115,7 @@
 
     .btn:hover {
       transform: translateY(-1px);
-      opacity: 0.95;
+      opacity: 0.96;
     }
 
     .legis {
@@ -136,7 +136,7 @@
 
     .hero-image img {
       width: 100%;
-      max-width: 460px;
+      max-width: 470px;
       height: 720px;
       object-fit: cover;
       object-position: center top;
@@ -355,7 +355,7 @@
     <a href="#inicio" class="brand">José Daniel Parraga</a>
     <div class="nav-links">
       <a href="#inicio">Inicio</a>
-      <a href="#legisolve">Legisolve</a>
+      <a href="#legissolve">Legis Solve</a>
       <a href="#lawyerist">The Lawyerist</a>
       <a href="#observatorio">Observatorio</a>
       <a href="#contacto">Contacto</a>
@@ -367,11 +367,12 @@
       <h1>José Daniel Parraga</h1>
       <div class="subtitle">Abogado · Litigio Estratégico · Análisis Institucional</div>
       <div class="hero-copy">
-        Una plataforma personal que reúne tu práctica jurídica, tu firma principal y tu proyecto de divulgación, con una presencia visual sobria, cinematográfica y precisa.
+        Abogado por la Universidad Católica Santiago de Guayaquil (UCSG), y Magíster en Derecho Constitucional por la Universidad Espíritu Santo (UEES). He ejercido como abogado litigante
+en ramas como Derecho Civil, Constitucional, Administrativo, Penal, Familia, Económico (derechos al consumidor/competencia económica).
       </div>
 
       <div class="buttons">
-        <a href="#legisolve" class="btn legis">Legis Solve Abogados</a>
+        <a href="#legissolve" class="btn legis">Legis Solve Abogados</a>
         <a href="#lawyerist" class="btn lawyerist">The Lawyerist</a>
       </div>
     </div>
@@ -381,9 +382,9 @@
     </div>
   </section>
 
-  <section id="legisolve" class="section legis-section">
+  <section id="legissolve" class="section legis-section">
     <div class="section-label">Firma principal</div>
-    <h2>Legisolve Abogados</h2>
+    <h2>Legis Solve Abogados</h2>
     <p>
       Firma jurídica orientada a litigio estratégico, derecho constitucional, derecho civil, derecho societario y registro de marcas, con una presentación clara, moderna y profesional.
     </p>
@@ -415,13 +416,13 @@
     <div class="section-label">Contenido</div>
     <h2>Observatorio</h2>
     <p>
-      Un espacio para tus piezas audiovisuales y análisis breves. Aquí luego integraremos tus reels de Legisolve y The Lawyerist.
+      Un espacio para tus piezas audiovisuales y análisis breves. Aquí luego integraremos tus reels de Legis Solve y The Lawyerist.
     </p>
 
     <div class="observatorio-grid">
       <div class="observatorio-card">
         <div>
-          <div class="tag">Legisolve</div>
+          <div class="tag">Legis Solve</div>
           <h3>Acción de protección</h3>
           <p>Explicación breve sobre procedencia, límites y enfoque estratégico.</p>
         </div>
@@ -450,7 +451,7 @@
     <h2>Conversemos.</h2>
     <div class="contact-box">
       <p><strong>Ciudad:</strong> Guayaquil, Ecuador</p>
-      <p><strong>Firma principal:</strong> Legisolve Abogados</p>
+      <p><strong>Firma principal:</strong> Legis Solve Abogados</p>
       <p><strong>WhatsApp:</strong> 0963894347</p>
       <a class="whatsapp" href="https://wa.me/593963894347" target="_blank">Escribir por WhatsApp</a>
     </div>
@@ -472,6 +473,11 @@
     btn.onclick = function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
+    if (window.location.hash === "#legisolve") {
+      history.replaceState(null, "", window.location.pathname);
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
   </script>
 
 </body>
