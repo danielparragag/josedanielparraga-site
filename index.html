@@ -64,12 +64,13 @@
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
       align-items: center;
-      gap: 44px;
-      padding: 120px 60px 70px;
+      gap: 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 120px 40px 70px;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(230,200,79,0.10), transparent 28%),
-        #0a0a0a;
+        radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(230,200,79,0.08), transparent 30%);
     }
 
     .hero-text {
@@ -82,26 +83,51 @@
       margin: 0 0 18px;
       letter-spacing: -0.05em;
       font-weight: 600;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: appearTitle 0.8s ease forwards;
     }
 
     .subtitle {
       font-size: 22px;
       color: rgba(255,255,255,0.72);
       margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: appearTitle 0.9s ease forwards;
+      animation-delay: 0.15s;
     }
 
     .hero-copy {
-      max-width: 680px;
+      max-width: 540px;
+      line-height: 1.75;
       font-size: 18px;
-      line-height: 1.72;
-      color: rgba(255,255,255,0.78);
-      margin-bottom: 34px;
+      color: #cfcfcf;
+      margin-top: 22px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: appearTitle 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .hero-copy p {
+      margin: 0 0 22px 0;
+    }
+
+    .hero-copy strong {
+      color: #ffffff;
+      font-weight: 600;
     }
 
     .buttons {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
+      margin-top: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: appearTitle 1.1s ease forwards;
+      animation-delay: 0.45s;
     }
 
     .btn {
@@ -134,20 +160,15 @@
       animation: fadeUp 1s ease;
     }
 
-    .hero-image img {
-      width: 100%;
-      max-width: 470px;
-      height: 720px;
+    .hero img {
+      width: 420px;
+      max-width: 100%;
+      height: 700px;
       object-fit: cover;
       object-position: center top;
-      border-radius: 28px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      border-radius: 22px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
       border: 1px solid rgba(255,255,255,0.08);
-      transition: transform 0.35s ease;
-    }
-
-    .hero-image img:hover {
-      transform: translateY(-4px) scale(1.01);
     }
 
     .section {
@@ -156,6 +177,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      max-width: 1280px;
+      margin: 0 auto;
     }
 
     .section-label {
@@ -194,7 +217,7 @@
       line-height: 1.5;
     }
 
-    .legis-section {
+    .legis-section-wrap {
       background: #f4f8ff;
       color: #111;
     }
@@ -205,7 +228,7 @@
       box-shadow: 0 10px 30px rgba(40, 70, 120, 0.05);
     }
 
-    .lawyerist-section {
+    .lawyerist-section-wrap {
       background: #e6c84f;
       color: #111;
     }
@@ -215,7 +238,7 @@
       border: 1px solid rgba(0,0,0,0.08);
     }
 
-    .observatorio-section {
+    .observatorio-section-wrap {
       background: #111;
       color: white;
     }
@@ -260,7 +283,7 @@
       margin: 0;
     }
 
-    .contact-section {
+    .contact-section-wrap {
       background: #0a0a0a;
       color: white;
     }
@@ -315,9 +338,17 @@
       }
     }
 
+    @keyframes appearTitle {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 980px) {
       .hero {
         grid-template-columns: 1fr;
+        gap: 36px;
         padding: 120px 24px 50px;
       }
 
@@ -342,12 +373,12 @@
         display: none;
       }
 
-      .hero img{
-width:420px;
-max-width:100%;
-border-radius:22px;
-box-shadow:0 40px 80px rgba(0,0,0,0.6);
-}
+      .hero img {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -356,7 +387,7 @@ box-shadow:0 40px 80px rgba(0,0,0,0.6);
     <a href="#inicio" class="brand">José Daniel Parraga</a>
     <div class="nav-links">
       <a href="#inicio">Inicio</a>
-      <a href="#legissolve">Legis Solve</a>
+      <a href="#legis-solve">Legis Solve</a>
       <a href="#lawyerist">The Lawyerist</a>
       <a href="#observatorio">Observatorio</a>
       <a href="#contacto">Contacto</a>
@@ -366,21 +397,27 @@ box-shadow:0 40px 80px rgba(0,0,0,0.6);
   <section id="inicio" class="hero">
     <div class="hero-text">
       <h1>José Daniel Parraga</h1>
-     <div class="subtitle">Abogado · Litigio Estratégico · Análisis Institucional</div>
 
-<div class="hero-copy">
+      <div class="subtitle">
+        Abogado · Litigio Estratégico · Análisis Institucional
+      </div>
 
-<p>
-Abogado por la <strong>Universidad Católica Santiago de Guayaquil (UCSG)</strong> y Magíster en <strong> Derecho Constitucional por la Universidad Espíritu Santo (UEES)</strong>.
+      <div class="hero-copy">
+        <p>
+          Abogado por la <strong>Universidad Católica Santiago de Guayaquil (UCSG)</strong> y Magíster en <strong>Derecho Constitucional por la Universidad Espíritu Santo (UEES)</strong>.
+        </p>
 
-He ejercido como abogado litigante en materias de <strong>Derecho Civil, Constitucional, Administrativo, Penal, Familia y Derecho Económico</strong>, con especial atención a temas de <strong>protección al consumidor y competencia económica</strong>.
+        <p>
+          He ejercido como abogado litigante en materias de <strong>Derecho Civil, Constitucional, Administrativo, Penal, Familia y Derecho Económico</strong>, con especial atención a temas de <strong>protección al consumidor y competencia económica</strong>.
+        </p>
 
-Este sitio reúne mi práctica profesional a través de <strong>Legis Solve Abogados</strong> y mi proyecto de divulgación jurídica <strong>The Lawyerist</strong>.
-</p>
+        <p>
+          Este sitio reúne mi práctica profesional a través de <strong>Legis Solve Abogados</strong> y mi proyecto de divulgación jurídica <strong>The Lawyerist</strong>.
+        </p>
+      </div>
 
-</div>
       <div class="buttons">
-        <a href="#legissolve" class="btn legis">Legis Solve Abogados</a>
+        <a href="#legis-solve" class="btn legis">Legis Solve Abogados</a>
         <a href="#lawyerist" class="btn lawyerist">The Lawyerist</a>
       </div>
     </div>
@@ -390,80 +427,89 @@ Este sitio reúne mi práctica profesional a través de <strong>Legis Solve Abog
     </div>
   </section>
 
-  <section id="legissolve" class="section legis-section">
-    <div class="section-label">Firma principal</div>
-    <h2>Legis Solve Abogados</h2>
-    <p>
-      Firma jurídica orientada a litigio estratégico, derecho constitucional, derecho civil, derecho societario y registro de marcas, con una presentación clara, moderna y profesional.
-    </p>
+  <div class="legis-section-wrap">
+    <section id="legis-solve" class="section legis-section">
+      <div class="section-label">Firma principal</div>
+      <h2>Legis Solve Abogados</h2>
+      <p>
+        Firma jurídica orientada a litigio estratégico, derecho constitucional, derecho civil, derecho societario y registro de marcas, con una presentación clara, moderna y profesional.
+      </p>
 
-    <div class="cards">
-      <div class="card">Derecho Constitucional</div>
-      <div class="card">Derecho Civil</div>
-      <div class="card">Derecho Societario</div>
-      <div class="card">Registro de Marcas</div>
-    </div>
-  </section>
+      <div class="cards">
+        <div class="card">Derecho Constitucional</div>
+        <div class="card">Derecho Civil</div>
+        <div class="card">Derecho Societario</div>
+        <div class="card">Registro de Marcas</div>
+      </div>
+    </section>
+  </div>
 
-  <section id="lawyerist" class="section lawyerist-section">
-    <div class="section-label">Autoría y divulgación</div>
-    <h2>The Lawyerist</h2>
-    <p>
-      Un proyecto de divulgación jurídica y análisis institucional con una identidad más editorial, visual y cinematográfica.
-    </p>
+  <div class="lawyerist-section-wrap">
+    <section id="lawyerist" class="section lawyerist-section">
+      <div class="section-label">Autoría y divulgación</div>
+      <h2>The Lawyerist</h2>
+      <p>
+        Un proyecto de divulgación jurídica y análisis institucional con una identidad más editorial, visual y cinematográfica.
+      </p>
 
-    <div class="cards">
-      <div class="card">Derecho e instituciones</div>
-      <div class="card">Análisis visual del poder</div>
-      <div class="card">Microensayos jurídicos</div>
-      <div class="card">Narrativa y estética legal</div>
-    </div>
-  </section>
+      <div class="cards">
+        <div class="card">Derecho e instituciones</div>
+        <div class="card">Análisis visual del poder</div>
+        <div class="card">Microensayos jurídicos</div>
+        <div class="card">Narrativa y estética legal</div>
+      </div>
+    </section>
+  </div>
 
-  <section id="observatorio" class="section observatorio-section">
-    <div class="section-label">Contenido</div>
-    <h2>Observatorio</h2>
-    <p>
-      Un espacio para tus piezas audiovisuales y análisis breves. Aquí luego integraremos tus reels de Legis Solve y The Lawyerist.
-    </p>
+  <div class="observatorio-section-wrap">
+    <section id="observatorio" class="section">
+      <div class="section-label">Contenido</div>
+      <h2>Observatorio</h2>
+      <p>
+        Un espacio para tus piezas audiovisuales y análisis breves. Aquí luego integraremos tus reels de Legis Solve y The Lawyerist.
+      </p>
 
-    <div class="observatorio-grid">
-      <div class="observatorio-card">
-        <div>
-          <div class="tag">Legis Solve</div>
-          <h3>Acción de protección</h3>
-          <p>Explicación breve sobre procedencia, límites y enfoque estratégico.</p>
+      <div class="observatorio-grid">
+        <div class="observatorio-card">
+          <div>
+            <div class="tag">Legis Solve</div>
+            <h3>Acción de protección</h3>
+            <p>Explicación breve sobre procedencia, límites y enfoque estratégico.</p>
+          </div>
+        </div>
+
+        <div class="observatorio-card">
+          <div>
+            <div class="tag">The Lawyerist</div>
+            <h3>Instituciones y poder</h3>
+            <p>Lectura visual y narrativa sobre lenguaje jurídico e institucionalidad.</p>
+          </div>
+        </div>
+
+        <div class="observatorio-card">
+          <div>
+            <div class="tag">Análisis</div>
+            <h3>Reserva de ley</h3>
+            <p>Microanálisis sobre potestad reglamentaria y límites constitucionales.</p>
+          </div>
         </div>
       </div>
+    </section>
+  </div>
 
-      <div class="observatorio-card">
-        <div>
-          <div class="tag">The Lawyerist</div>
-          <h3>Instituciones y poder</h3>
-          <p>Lectura visual y narrativa sobre lenguaje jurídico e institucionalidad.</p>
-        </div>
+  <div class="contact-section-wrap">
+    <section id="contacto" class="section">
+      <div class="section-label">Contacto</div>
+      <h2>Conversemos.</h2>
+
+      <div class="contact-box">
+        <p><strong>Ciudad:</strong> Guayaquil, Ecuador</p>
+        <p><strong>Firma principal:</strong> Legis Solve Abogados</p>
+        <p><strong>WhatsApp:</strong> 0963894347</p>
+        <a class="whatsapp" href="https://wa.me/593963894347" target="_blank">Escribir por WhatsApp</a>
       </div>
-
-      <div class="observatorio-card">
-        <div>
-          <div class="tag">Análisis</div>
-          <h3>Reserva de ley</h3>
-          <p>Microanálisis sobre potestad reglamentaria y límites constitucionales.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contacto" class="section contact-section">
-    <div class="section-label">Contacto</div>
-    <h2>Conversemos.</h2>
-    <div class="contact-box">
-      <p><strong>Ciudad:</strong> Guayaquil, Ecuador</p>
-      <p><strong>Firma principal:</strong> Legis Solve Abogados</p>
-      <p><strong>WhatsApp:</strong> 0963894347</p>
-      <a class="whatsapp" href="https://wa.me/593963894347" target="_blank">Escribir por WhatsApp</a>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <button id="topBtn">↑</button>
 
