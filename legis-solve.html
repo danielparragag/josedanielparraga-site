@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Legis Solve Abogados</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a3a6b;
+    --blue-light: #2a5298;
+    --blue-pale: #cfe3ff;
+    --bg: #f4f7fb;
+    --white: #ffffff;
+    --text: #0d0d1a;
+    --muted: #6a6a80;
+    --border: rgba(40,80,180,0.09);
+    --gold: #c9a84c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', Georgia, sans-serif; font-weight: 300; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(244,247,251,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  .navbar.scrolled { padding: 13px 48px; }
+  .brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px; font-weight: 500;
+    color: var(--blue);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand-back {
+    font-size: 12px; color: var(--muted);
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .brand-back:hover { color: var(--blue); }
+  .nav-links {
+    display: flex; gap: 32px;
+    font-size: 13px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--blue); color: white;
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    max-width: 1100px; margin: 0 auto;
+    padding: 160px 60px 100px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: -100px;
+    width: 600px; height: 100%;
+    background: radial-gradient(ellipse at right, rgba(207,227,255,0.4) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--blue-light);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 76px; line-height: 0.92;
+    letter-spacing: -0.02em; font-weight: 600;
+    color: var(--blue); margin-bottom: 32px;
+    max-width: 700px;
+  }
+  .hero-desc {
+    font-size: 19px; line-height: 1.75;
+    color: var(--muted); max-width: 560px;
+    margin-bottom: 44px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    padding: 14px 28px; border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.03em;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--blue); color: white; box-shadow: 0 4px 20px rgba(26,58,107,0.2); }
+  .btn-primary:hover { box-shadow: 0 8px 28px rgba(26,58,107,0.3); }
+  .btn-secondary { background: white; color: var(--blue); border: 1px solid var(--border); }
+
+  /* STATS */
+  .stats-wrap { background: var(--blue); }
+  .stats {
+    max-width: 1100px; margin: 0 auto;
+    padding: 60px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px; font-weight: 600;
+    color: white; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 13px; color: rgba(255,255,255,0.6);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); }
+
+  /* SECTIONS */
+  .section { max-width: 1100px; margin: 0 auto; padding: 100px 60px; }
+  .section-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 16px; }
+  .section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 54px; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--blue); }
+  .section-desc { font-size: 18px; line-height: 1.75; color: var(--muted); max-width: 680px; margin-bottom: 48px; }
+
+  /* AREAS */
+  .areas-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .area-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 18px; padding: 28px;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .area-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(26,58,107,0.08); }
+  .area-icon { font-size: 22px; margin-bottom: 14px; display: block; }
+  .area-title { font-size: 16px; font-weight: 500; margin-bottom: 10px; color: var(--blue); }
+  .area-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+  /* PROCESO */
+  .proceso-wrap { background: var(--blue); }
+  .proceso-wrap .section-label { color: rgba(207,227,255,0.7); }
+  .proceso-wrap .section h2 { color: white; }
+  .proceso-wrap .section-desc { color: rgba(255,255,255,0.6); }
+  .proceso-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; position: relative;
+  }
+  .proceso-steps::before {
+    content: '';
+    position: absolute; top: 28px; left: 40px; right: 40px; height: 1px;
+    background: rgba(255,255,255,0.15);
+  }
+  .step { position: relative; }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px; color: white;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .step-title { font-size: 16px; font-weight: 500; color: white; margin-bottom: 10px; }
+  .step-desc { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* CONTACTO */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: start;
+  }
+  .contact-info h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px; color: var(--blue);
+    margin-bottom: 24px; line-height: 1.1;
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
+  .contact-item { display: flex; flex-direction: column; gap: 4px; }
+  .contact-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .contact-value { font-size: 16px; font-weight: 400; color: var(--text); }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #25d366; color: white;
+    padding: 13px 24px; border-radius: 999px;
+    font-weight: 500; font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.25); }
+
+  /* FORM */
+  .contact-form {
+    background: white; border: 1px solid var(--border);
+    border-radius: 22px; padding: 40px;
+    box-shadow: 0 4px 32px rgba(26,58,107,0.06);
+  }
+  .form-title { font-size: 18px; font-weight: 500; color: var(--blue); margin-bottom: 28px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid var(--border); border-radius: 12px;
+    font-size: 15px; font-weight: 300;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text); background: var(--bg);
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: rgba(26,58,107,0.4);
+    box-shadow: 0 0 0 3px rgba(26,58,107,0.06);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .btn-submit {
+    width: 100%; padding: 14px;
+    background: var(--blue); color: white;
+    border: none; border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-submit:hover { background: var(--blue-light); transform: translateY(-1px); }
+  .form-success {
+    display: none; text-align: center;
+    padding: 20px; color: var(--blue);
+    font-size: 15px; line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer-wrap { background: var(--blue); }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 32px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+  .footer-inner a { color: rgba(255,255,255,0.6); }
+  .footer-inner a:hover { color: white; }
+
+  /* TOP BTN */
+  #topBtn {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 42px; height: 42px;
+    background: var(--blue); color: white;
+    border: none; border-radius: 50%; font-size: 16px;
+    cursor: pointer; display: none; z-index: 999;
+    align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  #topBtn:hover { background: var(--blue-light); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { padding: 120px 24px 70px; }
+    .hero h1 { font-size: 52px; }
+    .section { padding: 70px 24px; }
+    .section h2 { font-size: 40px; }
+    .areas-grid { grid-template-columns: 1fr; }
+    .proceso-steps { grid-template-columns: 1fr 1fr; }
+    .proceso-steps::before { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; gap: 28px; padding: 48px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .navbar { padding: 18px 24px; }
+    .footer-inner { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="index.html" class="brand-back">← José Daniel Parraga</a>
+    <span style="color:rgba(0,0,0,0.15);font-size:14px;">|</span>
+    <a href="legis-solve.html" class="brand">Legis Solve Abogados</a>
+  </div>
+  <div class="nav-links">
+    <a href="#areas">Áreas de práctica</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="nav-cta">Agendar consulta</a>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="eyebrow">Estudio jurídico · Guayaquil, Ecuador</div>
+  <h1>Legis Solve<br>Abogados</h1>
+  <p class="hero-desc">Asesoría jurídica para empresas y personas en materias civiles, corporativas, constitucionales y regulatorias.</p>
+  <div class="hero-btns">
+    <a href="#contacto" class="btn btn-primary">Agendar consulta</a>
+    <a href="#areas" class="btn btn-secondary">Áreas de práctica</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-wrap">
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Años de práctica</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">Áreas de práctica</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Dedicación al cliente</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ÁREAS -->
+<div style="background:var(--bg);">
+  <div class="section" id="areas">
+    <div class="section-label">Práctica jurídica</div>
+    <h2>Áreas de práctica</h2>
+    <p class="section-desc">Representación legal con rigor técnico y visión estratégica en las materias que más impactan a personas y empresas.</p>
+    <div class="areas-grid">
+      <div class="area-card">
+        <span class="area-icon">⚖️</span>
+        <div class="area-title">Litigio Estratégico</div>
+        <div class="area-desc">Representación judicial en materia civil, constitucional y administrativa. Acciones de protección, recursos y garantías jurisdiccionales.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">🏢</span>
+        <div class="area-title">Derecho Corporativo</div>
+        <div class="area-desc">Constitución de compañías, reformas estatutarias, aumentos de capital, disoluciones y cumplimiento de la Ley de Compañías.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">📋</span>
+        <div class="area-title">Cumplimiento y Riesgos</div>
+        <div class="area-desc">Gestión de riesgos legales, dictámenes preventivos y representación ante Contraloría, ARCONEL y otros organismos de control.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">📜</span>
+        <div class="area-title">Derecho Civil</div>
+        <div class="area-desc">Juicios de reivindicación, prescripción adquisitiva, procesos monitorios, ejecutivos y cobro de obligaciones.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">👨‍👩‍👧</span>
+        <div class="area-title">Derecho de Familia</div>
+        <div class="area-desc">Divorcios, juicios de alimentos, tenencia y declaratorias de herederos. Asesoría en partición de bienes y sucesiones.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">🛡️</span>
+        <div class="area-title">Defensa del Consumidor</div>
+        <div class="area-desc">Representación ante la Superintendencia de Competencia Económica. Propiedad intelectual y registro de marcas.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">⚖️</span>
+        <div class="area-title">Derecho Penal</div>
+        <div class="area-desc">Patrocinio en accidentes de tránsito, delitos económicos y casos contra la administración pública.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">🏛️</span>
+        <div class="area-title">Derecho Administrativo</div>
+        <div class="area-desc">Impugnación de multas, coactivas y procedimientos sancionadores ante entidades públicas.</div>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">👷</span>
+        <div class="area-title">Derecho Laboral</div>
+        <div class="area-desc">Trámites de visto bueno, desvinculaciones y manejo de conflictos con talento humano.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROCESO -->
+<div class="proceso-wrap">
+  <div class="section" id="proceso">
+    <div class="section-label">Cómo trabajamos</div>
+    <h2>El proceso</h2>
+    <p class="section-desc">Cada caso comienza con escucha y termina con resultados. Entre ambos, estrategia.</p>
+    <div class="proceso-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Consulta inicial</div>
+        <div class="step-desc">Evaluamos su situación jurídica sin compromiso y determinamos el mejor camino a seguir.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Estrategia</div>
+        <div class="step-desc">Diseñamos una estrategia legal clara, con objetivos definidos y plazos realistas.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Ejecución</div>
+        <div class="step-desc">Representación activa con comunicación permanente y atención a cada detalle del proceso.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Resolución</div>
+        <div class="step-desc">Seguimiento hasta el cierre completo del caso, con documentación y asesoría post-resolución.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<div style="background:var(--bg);">
+  <div class="section" id="contacto">
+    <div class="section-label">Contacto</div>
+    <h2>Agendar consulta</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Conversemos<br>sobre su caso.</h3>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-label">Ciudad</span>
+            <span class="contact-value">Guayaquil, Ecuador</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Correo</span>
+            <span class="contact-value">notificaciones@legisolve.com</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">+593 92 702 5387</span>
+          </div>
+        </div>
+        <a class="btn-wa" href="https://wa.me/593927025387" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">Enviar consulta</div>
+        <form id="contactForm" action="https://formspree.io/f/REEMPLAZAR_CON_TU_ID" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" name="nombre" placeholder="Su nombre" required>
+            </div>
+            <div class="form-group">
+              <label>Correo electrónico</label>
+              <input type="email" name="correo" placeholder="su@correo.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Teléfono (opcional)</label>
+            <input type="tel" name="telefono" placeholder="+593 ...">
+          </div>
+          <div class="form-group">
+            <label>Área de consulta</label>
+            <select name="area">
+              <option value="">Seleccionar área</option>
+              <option>Litigio Estratégico</option>
+              <option>Derecho Corporativo</option>
+              <option>Derecho Civil</option>
+              <option>Derecho de Familia</option>
+              <option>Derecho Penal</option>
+              <option>Derecho Administrativo</option>
+              <option>Cumplimiento y Riesgos</option>
+              <option>Defensa del Consumidor</option>
+              <option>Derecho Laboral</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensaje</label>
+            <textarea name="mensaje" placeholder="Describa brevemente su consulta..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar consulta</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          ✓ Mensaje enviado. Nos pondremos en contacto en las próximas 24 horas.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-wrap">
+  <div class="footer-inner">
+    <span>© 2026 Legis Solve Abogados</span>
+    <a href="index.html">José Daniel Parraga</a>
+  </div>
+</div>
+
+<button id="topBtn" aria-label="Volver arriba">↑</button>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY > 60;
+    navbar.classList.toggle('scrolled', s);
+    topBtn.style.display = s ? 'flex' : 'none';
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Form submit
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST', body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        btn.textContent = 'Error. Intente nuevamente.';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Error. Intente nuevamente.';
+      btn.disabled = false;
+    }
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.area-card, .step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

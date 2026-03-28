@@ -1,538 +1,605 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>José Daniel Parraga</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>José Daniel Parraga</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --blue-pale: #cfe3ff;
+    --bg: #080808;
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --text: #f0ede8;
+    --muted: rgba(240,237,232,0.52);
+  }
 
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-    * {
-      box-sizing: border-box;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', Georgia, sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #0a0a0a;
-      color: white;
-    }
+  a { text-decoration: none; color: inherit; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+  /* NAVBAR */
+  .navbar {
+    position: fixed; top: 0; left: 0; width: 100%;
+    z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px; font-weight: 500;
+  }
+  .nav-links {
+    display: flex; gap: 32px;
+    font-size: 13px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .nav-links a:hover { color: var(--text); }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 28px;
-      background: rgba(10, 10, 10, 0.68);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 70px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 140px 60px 90px;
+  }
 
-    .brand {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
 
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      color: rgba(255,255,255,0.78);
-    }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 80px;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
 
-    .nav-links a:hover {
-      color: white;
-    }
+  .hero-copy {
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(240,237,232,0.65);
+    max-width: 480px;
+  }
 
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 80px;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 40px 70px;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(230,200,79,0.08), transparent 30%);
-    }
+  .buttons {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin-top: 36px;
+  }
 
-    .hero-text {
-      animation: fadeUp 0.8s ease;
-    }
+  .btn {
+    padding: 13px 26px;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-legis { background: var(--blue-pale); color: #0a0a18; }
+  .btn-lawyerist { background: var(--gold); color: #111; }
 
-    .hero-text h1 {
-      font-size: 76px;
-      line-height: 0.94;
-      margin: 0 0 18px;
-      letter-spacing: -0.05em;
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: appearTitle 0.8s ease forwards;
-    }
+  .hero-image {
+    display: flex; justify-content: flex-end;
+    position: relative;
+  }
+  .hero-image::before {
+    content: '';
+    position: absolute;
+    right: -10px; top: 20px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-image img {
+    width: 400px; max-width: 100%;
+    height: 560px; object-fit: cover;
+    object-position: center top;
+    border-radius: 18px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    border: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
 
-    .subtitle {
-      font-size: 22px;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 24px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: appearTitle 0.9s ease forwards;
-      animation-delay: 0.15s;
-    }
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+  }
 
-    .hero-copy {
-      max-width: 540px;
-      line-height: 1.75;
-      font-size: 18px;
-      color: #cfcfcf;
-      margin-top: 22px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: appearTitle 1s ease forwards;
-      animation-delay: 0.3s;
-    }
+  /* SECTIONS */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 110px 60px;
+  }
 
-    .hero-copy p {
-      margin: 0 0 22px 0;
-    }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
 
-    .hero-copy strong {
-      color: #ffffff;
-      font-weight: 600;
-    }
+  .section h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 58px;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
 
-    .buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: appearTitle 1.1s ease forwards;
-      animation-delay: 0.45s;
-    }
+  .section-desc {
+    font-size: 18px;
+    line-height: 1.75;
+    color: rgba(240,237,232,0.65);
+    max-width: 700px;
+    margin-bottom: 48px;
+  }
 
-    .btn {
-      padding: 14px 26px;
-      font-size: 16px;
-      border-radius: 999px;
-      display: inline-block;
-      font-weight: 500;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.96;
-    }
+  .card {
+    padding: 30px;
+    border-radius: 18px;
+    transition: transform 0.25s ease;
+  }
+  .card:hover { transform: translateY(-3px); }
 
-    .legis {
-      background: #cfe3ff;
-      color: #0a0a0a;
-    }
+  .card-icon { font-size: 22px; margin-bottom: 12px; display: block; }
+  .card-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+  .card-desc { font-size: 14px; font-weight: 300; line-height: 1.6; }
 
-    .lawyerist {
-      background: #e6c84f;
-      color: #111;
-    }
+  /* LEGIS SOLVE */
+  .legis-wrap { background: #f4f7fb; color: #0d0d14; }
+  .legis-wrap .section-label { color: #3060b0; }
+  .legis-wrap .section h2 { color: #0d0d14; }
+  .legis-wrap .section-desc { color: #505068; }
+  .legis-wrap .card { background: white; border: 1px solid rgba(40,80,180,0.08); box-shadow: 0 2px 16px rgba(40,70,160,0.05); }
+  .legis-wrap .card-title { color: #0d0d14; }
+  .legis-wrap .card-desc { color: #666; }
 
-    .hero-image {
-      display: flex;
-      justify-content: center;
-      animation: fadeUp 1s ease;
-    }
+  /* LAWYERIST */
+  .lawyerist-wrap { background: #09080a; }
+  .lawyerist-wrap .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+  .lawyerist-wrap .card:hover { background: rgba(201,168,76,0.05); border-color: rgba(201,168,76,0.15); }
+  .lawyerist-wrap .card-desc { color: var(--muted); }
 
-    .hero img {
-      width: 420px;
-      max-width: 100%;
-      height: 700px;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 22px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
+  /* FORMACIÓN */
+  .formacion-wrap { background: #0c0c0e; }
+  .formacion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .formacion-col h3 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .formacion-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .formacion-item:first-of-type { padding-top: 0; }
+  .formacion-item:last-of-type { border-bottom: none; }
+  .formacion-titulo { font-size: 16px; font-weight: 400; margin-bottom: 4px; }
+  .formacion-inst { font-size: 13px; color: var(--muted); font-weight: 300; }
 
-    .section {
-      min-height: 100vh;
-      padding: 110px 60px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
+  /* VIDEOS */
+  .videos-wrap { background: #060606; }
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+  .video-item { display: flex; flex-direction: column; gap: 10px; }
+  .video-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .video-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px; line-height: 1.35;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .video-embed {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: #111;
+  }
+  .video-embed .instagram-media {
+    width: 100% !important; min-width: unset !important; margin: 0 !important;
+  }
 
-    .section-label {
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.65;
-      margin-bottom: 16px;
-    }
+  /* CONTACTO */
+  .contact-wrap { background: var(--bg); }
+  .contact-inner {
+    max-width: 600px;
+    margin-top: 44px; padding: 40px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .contact-row { display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
+  .contact-item { display: flex; flex-direction: column; gap: 4px; }
+  .contact-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .contact-value { font-size: 17px; font-weight: 400; }
+  .btn-wa {
+    display: inline-block;
+    background: white; color: #111;
+    padding: 13px 26px; border-radius: 999px;
+    font-weight: 500; font-size: 14px;
+    letter-spacing: 0.03em;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s ease;
+  }
+  .btn-wa:hover { transform: translateY(-2px); }
 
-    .section h2 {
-      font-size: 56px;
-      line-height: 1;
-      margin: 0 0 22px;
-      letter-spacing: -0.04em;
-    }
+  /* REDES */
+  .social-links { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .social-link {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 13px; color: var(--muted);
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .social-link:hover { border-color: rgba(201,168,76,0.4); color: var(--text); background: rgba(201,168,76,0.05); }
+  .social-link svg { width: 15px; height: 15px; flex-shrink: 0; }
 
-    .section p {
-      font-size: 20px;
-      line-height: 1.7;
-      max-width: 860px;
-      margin: 0 0 34px;
-    }
+  /* FOOTER */
+  .footer-inner {
+    border-top: 1px solid var(--border);
+    padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--muted);
+    max-width: 1200px; margin: 0 auto;
+    letter-spacing: 0.04em;
+  }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 10px;
-    }
+  /* TOP BUTTON */
+  #topBtn {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.08);
+    color: white; border: 1px solid var(--border);
+    border-radius: 50%; font-size: 16px;
+    cursor: pointer; display: none; z-index: 999;
+    align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  #topBtn:hover { background: rgba(255,255,255,0.14); }
 
-    .card {
-      padding: 28px;
-      border-radius: 24px;
-      font-size: 18px;
-      line-height: 1.5;
-    }
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
 
-    .legis-section-wrap {
-      background: #f4f8ff;
-      color: #111;
-    }
+  .eyebrow   { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .hero h1   { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+  .hero-copy { animation: fadeUp 0.7s ease both; animation-delay: 0.4s; }
+  .buttons   { animation: fadeUp 0.7s ease both; animation-delay: 0.55s; }
+  .hero-image { animation: fadeIn 0.9s ease both; animation-delay: 0.4s; }
 
-    .legis-section .card {
-      background: white;
-      border: 1px solid rgba(20, 60, 120, 0.08);
-      box-shadow: 0 10px 30px rgba(40, 70, 120, 0.05);
-    }
+  .section-label { animation: fadeUp 0.5s ease both; }
+  .section h2    { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .section-desc  { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
 
-    .lawyerist-section-wrap {
-      background: #e6c84f;
-      color: #111;
-    }
-
-    .lawyerist-section .card {
-      background: rgba(255,255,255,0.45);
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .observatorio-section-wrap {
-      background: #111;
-      color: white;
-    }
-
-    .observatorio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 10px;
-    }
-
-    .observatorio-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 24px;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .observatorio-card .tag {
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0.55;
-      margin-bottom: 10px;
-    }
-
-    .observatorio-card h3 {
-      margin: 0 0 14px;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-    }
-
-    .observatorio-card p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.72);
-      margin: 0;
-    }
-
-    .contact-section-wrap {
-      background: #0a0a0a;
-      color: white;
-    }
-
-    .contact-box {
-      margin-top: 24px;
-      padding: 32px;
-      border-radius: 26px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      max-width: 760px;
-    }
-
-    .contact-box p {
-      margin-bottom: 16px;
-      font-size: 18px;
-    }
-
-    .contact-box .whatsapp {
-      display: inline-block;
-      margin-top: 10px;
-      background: white;
-      color: #111;
-      padding: 14px 24px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
-    #topBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(0,0,0,0.65);
-      color: white;
-      border: none;
-      padding: 14px 18px;
-      border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
-      display: none;
-      z-index: 1001;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes appearTitle {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        padding: 120px 24px 50px;
-      }
-
-      .hero-text h1 {
-        font-size: 54px;
-      }
-
-      .section {
-        padding: 90px 24px 70px;
-      }
-
-      .section h2 {
-        font-size: 42px;
-      }
-
-      .cards,
-      .observatorio-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero img {
-        width: 100%;
-        max-width: 420px;
-        height: auto;
-      }
-    }
-  </style>
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding: 110px 24px 60px; }
+    .hero h1 { font-size: 54px; }
+    .hero-image { justify-content: center; }
+    .hero-image::before { display: none; }
+    .hero-image img { width: 100%; max-width: 320px; height: 400px; }
+    .section { padding: 80px 24px; }
+    .section h2 { font-size: 42px; }
+    .cards-grid, .videos-grid, .formacion-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .navbar { padding: 18px 24px; }
+    .footer-inner { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <a href="#inicio" class="brand">José Daniel Parraga</a>
-    <div class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#legis-solve">Legis Solve</a>
-      <a href="#lawyerist">The Lawyerist</a>
-      <a href="#observatorio">Observatorio</a>
-      <a href="#contacto">Contacto</a>
+<nav class="navbar">
+  <a href="index.html" class="brand">José Daniel Parraga</a>
+  <div class="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="legis-solve.html">Legis Solve</a>
+    <a href="the-lawyerist.html">The Lawyerist</a>
+    <a href="#formacion">Formación</a>
+    <a href="#publicaciones">Publicaciones</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-text">
+    <div class="eyebrow">Abogado · Magíster en Derecho Constitucional · Guayaquil</div>
+    <h1>José<br>Daniel<br>Parraga</h1>
+    <div class="hero-copy">
+      <p>Abogado con formación en derecho constitucional y práctica en litigio estratégico y asesoría corporativa.</p>
     </div>
-  </nav>
+    <div class="buttons">
+      <a href="#legis-solve" class="btn btn-legis">Legis Solve Abogados</a>
+      <a href="#lawyerist" class="btn btn-lawyerist">The Lawyerist</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="daniel.jpg" alt="José Daniel Parraga">
+  </div>
+</section>
 
-  <section id="inicio" class="hero">
-    <div class="hero-text">
-      <h1>José Daniel Parraga</h1>
+<div class="divider"></div>
 
-      <div class="subtitle">
-        Abogado · Litigio Estratégico · Análisis Institucional
+<!-- LEGIS SOLVE -->
+<div class="legis-wrap">
+  <div class="section" id="legis-solve">
+    <div class="section-label">Estudio jurídico</div>
+    <h2>Legis Solve<br>Abogados</h2>
+    <p class="section-desc">Asesoría jurídica para empresas y personas en materias civiles, corporativas, constitucionales y regulatorias.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">⚖️</span>
+        <div class="card-title">Litigio Estratégico</div>
+        <div class="card-desc">Representación judicial en materia civil, constitucional, administrativa y penal. Acciones de protección y garantías jurisdiccionales.</div>
       </div>
-
-      <div class="hero-copy">
-        <p>
-          Abogado por la <strong>Universidad Católica Santiago de Guayaquil (UCSG)</strong> y Magíster en <strong>Derecho Constitucional por la Universidad Espíritu Santo (UEES)</strong>.
-        </p>
-
-        <p>
-          He ejercido como abogado litigante en materias de <strong>Derecho Civil, Constitucional, Administrativo, Penal, Familia y Derecho Económico</strong>, con especial atención a temas de <strong>protección al consumidor y competencia económica</strong>.
-        </p>
-
-        <p>
-          Este sitio reúne mi práctica profesional a través de <strong>Legis Solve Abogados</strong> y mi proyecto de divulgación jurídica <strong>The Lawyerist</strong>.
-        </p>
+      <div class="card">
+        <span class="card-icon">🏢</span>
+        <div class="card-title">Derecho Corporativo</div>
+        <div class="card-desc">Constitución de compañías, reformas estatutarias, disoluciones y contratos mercantiles. Cumplimiento de la Ley de Compañías.</div>
       </div>
-
-      <div class="buttons">
-        <a href="#legis-solve" class="btn legis">Legis Solve Abogados</a>
-        <a href="#lawyerist" class="btn lawyerist">The Lawyerist</a>
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <div class="card-title">Cumplimiento y Riesgos</div>
+        <div class="card-desc">Gestión de riesgos legales, dictámenes preventivos y representación ante organismos de control como Contraloría y ARCONEL.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🛡️</span>
+        <div class="card-title">Defensa del Consumidor</div>
+        <div class="card-desc">Representación ante la Superintendencia de Competencia Económica. Propiedad intelectual y registro de marcas.</div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="hero-image">
-      <img src="daniel.jpg" alt="José Daniel Parraga">
+<div class="divider"></div>
+
+<!-- THE LAWYERIST -->
+<div class="lawyerist-wrap">
+  <div class="section" id="lawyerist">
+    <div class="section-label">Canal de divulgación</div>
+    <h2>The<br>Lawyerist</h2>
+    <p class="section-desc">Un espacio de divulgación jurídica dedicado a la filosofía del derecho, el pensamiento constitucional y el análisis de la realidad normativa e institucional.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">📖</span>
+        <div class="card-title">Filosofía del Derecho</div>
+        <div class="card-desc">Análisis de las grandes corrientes del pensamiento jurídico: positivismo, iusnaturalismo, teoría crítica y filosofía política del derecho.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏛️</span>
+        <div class="card-title">Derecho Constitucional</div>
+        <div class="card-desc">Garantías jurisdiccionales, control constitucional, reformas normativas y análisis de sentencias relevantes del sistema ecuatoriano.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">✍️</span>
+        <div class="card-title">Teoría y Dogmática</div>
+        <div class="card-desc">Explicación rigurosa de conceptos e instituciones jurídicas: desde los precedentes constitucionales hasta la teoría de la norma.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🗞️</span>
+        <div class="card-title">Coyuntura Jurídica</div>
+        <div class="card-desc">Lectura jurídica de la actualidad política e institucional ecuatoriana, con perspectiva constitucional y filosófica.</div>
+      </div>
     </div>
-  </section>
-
-  <div class="legis-section-wrap">
-    <section id="legis-solve" class="section legis-section">
-      <div class="section-label">Firma principal</div>
-      <h2>Legis Solve Abogados</h2>
-      <p>
-        Firma jurídica orientada a litigio estratégico, derecho constitucional, derecho civil, derecho societario y registro de marcas, con una presentación clara, moderna y profesional.
-      </p>
-
-      <div class="cards">
-        <div class="card">Derecho Constitucional</div>
-        <div class="card">Derecho Civil</div>
-        <div class="card">Derecho Societario</div>
-        <div class="card">Registro de Marcas</div>
-      </div>
-    </section>
   </div>
+</div>
 
-  <div class="lawyerist-section-wrap">
-    <section id="lawyerist" class="section lawyerist-section">
-      <div class="section-label">Autoría y divulgación</div>
-      <h2>The Lawyerist</h2>
-      <p>
-        Un proyecto de divulgación jurídica y análisis institucional con una identidad más editorial, visual y cinematográfica.
-      </p>
+<div class="divider"></div>
 
-      <div class="cards">
-        <div class="card">Derecho e instituciones</div>
-        <div class="card">Análisis visual del poder</div>
-        <div class="card">Microensayos jurídicos</div>
-        <div class="card">Narrativa y estética legal</div>
-      </div>
-    </section>
-  </div>
-
-  <div class="observatorio-section-wrap">
-    <section id="observatorio" class="section">
-      <div class="section-label">Contenido</div>
-      <h2>Observatorio</h2>
-      <p>
-        Un espacio para tus piezas audiovisuales y análisis breves. Aquí luego integraremos tus reels de Legis Solve y The Lawyerist.
-      </p>
-
-      <div class="observatorio-grid">
-        <div class="observatorio-card">
-          <div>
-            <div class="tag">Legis Solve</div>
-            <h3>Acción de protección</h3>
-            <p>Explicación breve sobre procedencia, límites y enfoque estratégico.</p>
-          </div>
+<!-- FORMACIÓN -->
+<div class="formacion-wrap">
+  <div class="section" id="formacion">
+    <div class="section-label">Trayectoria académica</div>
+    <h2>Formación</h2>
+    <div class="formacion-grid">
+      <div class="formacion-col">
+        <h3>Títulos</h3>
+        <div class="formacion-item">
+          <div class="formacion-titulo">Magíster en Derecho Constitucional</div>
+          <div class="formacion-inst">Universidad Espíritu Santo — UEES</div>
         </div>
-
-        <div class="observatorio-card">
-          <div>
-            <div class="tag">The Lawyerist</div>
-            <h3>Instituciones y poder</h3>
-            <p>Lectura visual y narrativa sobre lenguaje jurídico e institucionalidad.</p>
-          </div>
-        </div>
-
-        <div class="observatorio-card">
-          <div>
-            <div class="tag">Análisis</div>
-            <h3>Reserva de ley</h3>
-            <p>Microanálisis sobre potestad reglamentaria y límites constitucionales.</p>
-          </div>
+        <div class="formacion-item">
+          <div class="formacion-titulo">Abogado</div>
+          <div class="formacion-inst">Universidad Católica de Santiago de Guayaquil — UCSG</div>
         </div>
       </div>
-    </section>
-  </div>
-
-  <div class="contact-section-wrap">
-    <section id="contacto" class="section">
-      <div class="section-label">Contacto</div>
-      <h2>Conversemos.</h2>
-
-      <div class="contact-box">
-        <p><strong>Ciudad:</strong> Guayaquil, Ecuador</p>
-        <p><strong>Firma principal:</strong> Legis Solve Abogados</p>
-        <p><strong>WhatsApp:</strong> 0963894347</p>
-        <a class="whatsapp" href="https://wa.me/593963894347" target="_blank">Escribir por WhatsApp</a>
+      <div class="formacion-col">
+        <h3>Diplomados y certificaciones</h3>
+        <div class="formacion-item">
+          <div class="formacion-titulo">Teoría de la Interpretación y Razonamiento Jurídico</div>
+          <div class="formacion-inst">Università di Genova</div>
+        </div>
+        <div class="formacion-item">
+          <div class="formacion-titulo">Economía y Políticas Públicas</div>
+          <div class="formacion-inst">Universidad Espíritu Santo — UEES</div>
+        </div>
+        <div class="formacion-item">
+          <div class="formacion-titulo">Teoría Monetaria y Bancaria</div>
+          <div class="formacion-inst">Yale University · Coursera</div>
+        </div>
       </div>
-    </section>
+    </div>
   </div>
+</div>
 
-  <button id="topBtn">↑</button>
+<div class="divider"></div>
 
-  <script>
-    const btn = document.getElementById("topBtn");
+<!-- PUBLICACIONES -->
+<div class="videos-wrap">
+  <div class="section" id="publicaciones">
+    <div class="section-label">The Lawyerist</div>
+    <h2>Publicaciones</h2>
+    <p class="section-desc">Selección de contenido audiovisual sobre derecho constitucional, filosofía jurídica y análisis institucional.</p>
+    <div class="videos-grid">
+      <div class="video-item">
+        <div class="video-label">Derecho Civil</div>
+        <div class="video-title">¿Qué son las Cláusulas Prohibidas?</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/CtzYD_tgBhp/"
+            data-instgrm-version="14"
+            style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;">
+          </blockquote>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-label">Derecho Constitucional</div>
+        <div class="video-title">Análisis de la sentencia sobre los 4 niños de Las Malvinas</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DWO_FwUgI3R/"
+            data-instgrm-version="14"
+            style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;">
+          </blockquote>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-label">Filosofía del Derecho</div>
+        <div class="video-title">¿Sabías que Andrés Bello fue el primer positivista latinoamericano?</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/CxVWxBQL8ZF/"
+            data-instgrm-version="14"
+            style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;">
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    window.onscroll = function () {
-      if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<div class="contact-wrap">
+  <div class="section" id="contacto">
+    <div class="section-label">Contacto</div>
+    <h2>Conversemos.</h2>
+    <div class="contact-inner">
+      <div class="contact-row">
+        <div class="contact-item">
+          <span class="contact-label">Ciudad</span>
+          <span class="contact-value">Guayaquil, Ecuador</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Correo</span>
+          <span class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfabaea1a6aaa3bfaebdbdaea8aea88fa8a2aea6a3e1aca0a2">[email&#160;protected]</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value">+593 92 702 5387</span>
+        </div>
+      </div>
+      <a class="btn-wa" href="https://wa.me/593927025387" target="_blank">Escribir por WhatsApp →</a>
+      <div class="social-links">
+        <a class="social-link" href="https://www.instagram.com/the.lawyerist/" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+          </svg>
+          @the.lawyerist
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@thelawyerist" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+          </svg>
+          @thelawyerist
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 José Daniel Parraga</span>
+    <span>Legis Solve Abogados · The Lawyerist</span>
+  </div>
+</footer>
+
+<button id="topBtn" aria-label="Volver arriba">↑</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="//www.instagram.com/embed.js"></script>
+
+<script>
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Navbar scroll effect
+  const navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.padding = window.scrollY > 60 ? '12px 48px' : '20px 48px';
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
       }
-    };
+    });
+  }, { threshold: 0.1 });
 
-    btn.onclick = function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    if (window.location.hash === "#legisolve") {
-      history.replaceState(null, "", window.location.pathname);
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
-  </script>
-
-</body>
-</html>
+  document.querySelectorAll('.card, .formacion-

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Lawyerist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.15);
+    --bg: #080808;
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --text: #f0ede8;
+    --muted: rgba(240,237,232,0.52);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', Georgia, sans-serif; font-weight: 300; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(8,8,8,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  .navbar.scrolled { padding: 13px 48px; }
+  .brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16px; font-weight: 500;
+    color: var(--gold);
+  }
+  .brand-back { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; transition: color 0.2s; }
+  .brand-back:hover { color: var(--text); }
+  .nav-links { display: flex; gap: 32px; font-size: 13px; color: var(--muted); letter-spacing: 0.04em; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-social { display: flex; gap: 12px; align-items: center; }
+  .nav-social a {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted);
+    padding: 7px 14px; border-radius: 999px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .nav-social a:hover { border-color: rgba(201,168,76,0.4); color: var(--text); }
+  .nav-social svg { width: 13px; height: 13px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 160px 60px 80px;
+    max-width: 1100px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-bg {
+    position: fixed; inset: 0; z-index: -1;
+    background: radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 45%);
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 86px; line-height: 0.9;
+    letter-spacing: -0.025em; font-weight: 600;
+    margin-bottom: 36px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-desc {
+    font-size: 19px; line-height: 1.75;
+    color: var(--muted); max-width: 580px;
+    margin-bottom: 44px;
+  }
+  .hero-social { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-social {
+    display: flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-social:hover { border-color: rgba(201,168,76,0.5); background: var(--gold-dim); transform: translateY(-2px); }
+  .btn-social svg { width: 16px; height: 16px; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); }
+
+  /* SECTIONS */
+  .section { max-width: 1100px; margin: 0 auto; padding: 100px 60px; }
+  .section-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 54px; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .section-desc { font-size: 17px; line-height: 1.75; color: var(--muted); max-width: 640px; margin-bottom: 52px; }
+
+  /* TEMAS */
+  .temas-wrap { background: #0a090b; }
+  .temas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .tema-card {
+    padding: 30px; border-radius: 18px;
+    background: var(--surface); border: 1px solid var(--border);
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  }
+  .tema-card:hover { background: rgba(201,168,76,0.05); border-color: rgba(201,168,76,0.18); transform: translateY(-3px); }
+  .tema-icon { font-size: 22px; margin-bottom: 12px; display: block; }
+  .tema-title { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+  .tema-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+  /* VIDEOS */
+  .videos-wrap { background: #060606; }
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+  .video-item { display: flex; flex-direction: column; gap: 10px; }
+  .video-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .video-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px; line-height: 1.35; color: var(--text);
+  }
+  .video-embed {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border); background: #111;
+  }
+  .video-embed .instagram-media { width: 100% !important; min-width: unset !important; margin: 0 !important; }
+
+  /* CTA */
+  .cta-wrap { background: var(--gold); }
+  .cta-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 40px;
+  }
+  .cta-text h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42px; line-height: 1; color: #111;
+    margin-bottom: 12px; letter-spacing: -0.02em;
+  }
+  .cta-text p { font-size: 16px; color: rgba(0,0,0,0.55); }
+  .cta-btns { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn-cta {
+    padding: 14px 26px; border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.2s;
+  }
+  .btn-cta:hover { transform: translateY(-2px); }
+  .btn-cta-dark { background: #111; color: white; }
+  .btn-cta-outline { background: transparent; color: #111; border: 1px solid rgba(0,0,0,0.2); }
+
+  /* FOOTER */
+  .footer-inner {
+    border-top: 1px solid var(--border);
+    padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--muted);
+    max-width: 1100px; margin: 0 auto;
+    letter-spacing: 0.04em;
+  }
+  .footer-inner a { color: var(--muted); transition: color 0.2s; }
+  .footer-inner a:hover { color: var(--text); }
+
+  #topBtn {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 42px; height: 42px;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50%; font-size: 16px;
+    cursor: pointer; display: none; z-index: 999;
+    align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  #topBtn:hover { background: rgba(201,168,76,0.25); }
+
+  @media (max-width: 900px) {
+    .hero { padding: 120px 24px 60px; }
+    .hero h1 { font-size: 56px; }
+    .section { padding: 70px 24px; }
+    .section h2 { font-size: 40px; }
+    .temas-grid, .videos-grid { grid-template-columns: 1fr; }
+    .cta-inner { flex-direction: column; padding: 60px 24px; }
+    .nav-links { display: none; }
+    .navbar { padding: 18px 24px; }
+    .footer-inner { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero-bg"></div>
+
+<nav class="navbar" id="navbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a href="index.html" class="brand-back">← José Daniel Parraga</a>
+    <span style="color:rgba(255,255,255,0.12);font-size:14px;">|</span>
+    <a href="the-lawyerist.html" class="brand">The Lawyerist</a>
+  </div>
+  <div class="nav-links">
+    <a href="#temas">Temas</a>
+    <a href="#publicaciones">Publicaciones</a>
+  </div>
+  <div class="nav-social">
+    <a href="https://www.instagram.com/the.lawyerist/" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@thelawyerist" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+      TikTok
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="eyebrow">Canal de divulgación jurídica</div>
+  <h1>The<br><em>Lawyerist</em></h1>
+  <p class="hero-desc">Un espacio de divulgación jurídica dedicado a la filosofía del derecho, el pensamiento constitucional y el análisis de la realidad normativa e institucional.</p>
+  <div class="hero-social">
+    <a class="btn-social" href="https://www.instagram.com/the.lawyerist/" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      @the.lawyerist en Instagram
+    </a>
+    <a class="btn-social" href="https://www.tiktok.com/@thelawyerist" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+      @thelawyerist en TikTok
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEMAS -->
+<div class="temas-wrap">
+  <div class="section" id="temas">
+    <div class="section-label">Contenido</div>
+    <h2>Qué encontrarás</h2>
+    <p class="section-desc">Análisis riguroso, accesible y con perspectiva propia sobre las grandes cuestiones del derecho.</p>
+    <div class="temas-grid">
+      <div class="tema-card">
+        <span class="tema-icon">📖</span>
+        <div class="tema-title">Filosofía del Derecho</div>
+        <div class="tema-desc">Las grandes corrientes del pensamiento jurídico: positivismo, iusnaturalismo, teoría crítica y filosofía política del derecho.</div>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">🏛️</span>
+        <div class="tema-title">Derecho Constitucional</div>
+        <div class="tema-desc">Garantías jurisdiccionales, control constitucional, reformas normativas y análisis de sentencias relevantes del sistema ecuatoriano.</div>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">✍️</span>
+        <div class="tema-title">Teoría y Dogmática</div>
+        <div class="tema-desc">Explicación rigurosa de instituciones jurídicas: precedentes constitucionales, teoría de la norma y razonamiento jurídico.</div>
+      </div>
+      <div class="tema-card">
+        <span class="tema-icon">🗞️</span>
+        <div class="tema-title">Coyuntura Jurídica</div>
+        <div class="tema-desc">Lectura jurídica de la actualidad política e institucional ecuatoriana, con perspectiva constitucional y filosófica.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PUBLICACIONES -->
+<div class="videos-wrap">
+  <div class="section" id="publicaciones">
+    <div class="section-label">Instagram · TikTok</div>
+    <h2>Publicaciones</h2>
+    <p class="section-desc">Contenido audiovisual sobre derecho constitucional, filosofía jurídica y análisis institucional.</p>
+    <div class="videos-grid">
+
+      <div class="video-item">
+        <div class="video-label">Derecho Civil</div>
+        <div class="video-title">¿Qué son las Cláusulas Prohibidas?</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CtzYD_tgBhp/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-label">Derecho Constitucional</div>
+        <div class="video-title">Análisis de la sentencia sobre los 4 niños de Las Malvinas</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DWO_FwUgI3R/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-label">Filosofía del Derecho</div>
+        <div class="video-title">¿Sabías que Andrés Bello fue el primer positivista latinoamericano?</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CxVWxBQL8ZF/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-label">Derecho Constitucional</div>
+        <div class="video-title">Manifiesta Improcedencia vs Desnaturalización</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DOtENWogK-X/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-label">Filosofía del Derecho</div>
+        <div class="video-title">Hans Kelsen vs Carl Schmitt</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DOV1J-igKMq/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-label">Derecho Constitucional</div>
+        <div class="video-title">Los Tipos de Hábeas Data</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DADsHIZRagl/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-label">Derecho Constitucional</div>
+        <div class="video-title">¿Qué es la Tutela Judicial Efectiva?</div>
+        <div class="video-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CzL6e-KrhrR/" data-instgrm-version="14" style="background:#111;border:0;margin:0;padding:0;width:100%;min-width:unset;"></blockquote>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2>¿Necesitas asesoría<br>jurídica?</h2>
+      <p>Visita Legis Solve Abogados para consultas profesionales.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="legis-solve.html" class="btn-cta btn-cta-dark">Legis Solve Abogados</a>
+      <a href="index.html" class="btn-cta btn-cta-outline">Inicio</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 The Lawyerist · José Daniel Parraga</span>
+    <div style="display:flex;gap:20px;">
+      <a href="https://www.instagram.com/the.lawyerist/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@thelawyerist" target="_blank">TikTok</a>
+      <a href="index.html">Inicio</a>
+    </div>
+  </div>
+</footer>
+
+<button id="topBtn" aria-label="Volver arriba">↑</button>
+
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+  const navbar = document.getElementById('navbar');
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY > 60;
+    navbar.classList.toggle('scrolled', s);
+    topBtn.style.display = s ? 'flex' : 'none';
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.tema-card, .video-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
