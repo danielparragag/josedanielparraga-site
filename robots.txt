@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://isonomy.ec/sitemap.xml
