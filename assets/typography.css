@@ -1,0 +1,10 @@
+/* Typography trial: native San Francisco on Apple, system sans elsewhere.
+   Revert by removing the typography link; original HTML is archived. */
+body{font-family:-apple-system,"SF Pro Display",BlinkMacSystemFont,"Segoe UI",sans-serif;font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+body h1,body h2,body h3,body h4,body em,body strong,body button,body input,body textarea,body select,body .film-brand{font-family:inherit!important;font-style:normal!important}
+body h1,body h1 em{font-weight:600!important;letter-spacing:-.04em!important}
+body h2,body h2 em{font-weight:600!important;letter-spacing:-.035em!important}
+body h3{font-weight:500!important;letter-spacing:-.025em!important}
+body h1 em,body h2 em{font-size:inherit;line-height:inherit}
+body .case-route strong{font-weight:500;letter-spacing:-.025em}
+body .service-body h3{line-height:1.15}
