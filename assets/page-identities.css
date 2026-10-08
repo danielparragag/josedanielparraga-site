@@ -18,7 +18,8 @@ body nav{background:var(--nav)}body .eyebrow{color:var(--copper)}body .contact{b
 .page-practice .scene{width:min(54vw,205px);max-width:205px;height:auto}.page-practice .method-label{font-size:7px}.page-practice .scene-caption{font-size:8px;bottom:1%}
 .page-practice .story-narrative{grid-row:2;grid-column:1;display:block;min-height:0;overflow:hidden;z-index:1;border-top:1px solid var(--line);padding:0}
 .story-track{display:block;will-change:transform}
-.page-practice .story-row,.page-practice .page-intro+.scroll-story .hero-row{display:flex;align-items:flex-start;min-height:calc(69svh - var(--nav-height));padding:24px 0 60px;order:unset}
+.page-practice .story-row,.page-practice .page-intro+.scroll-story .hero-row{display:flex;align-items:flex-start;min-height:0;padding:24px 0 60px;order:unset}
+.page-practice .story-row:last-child{min-height:calc(69svh - var(--nav-height))}
 .page-practice .practice-title,.page-practice .process-copy h2{font-size:clamp(28px,7.5vw,36px);line-height:1.12;letter-spacing:-1px;margin:14px 0 18px}
 .page-practice .stagecopy p,.page-practice .process-copy p{font-size:14px;line-height:1.65;margin:15px 0}.page-practice .personal-credit{margin-top:16px}.page-practice .story-row .eyebrow{font-size:9px;letter-spacing:1.4px}
 }
