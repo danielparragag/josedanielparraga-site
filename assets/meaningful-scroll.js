@@ -41,7 +41,7 @@
    const p=reduced.matches?.48:clamp((navHeight-story.getBoundingClientRect().top)/travel);
    const analysis=phase(p,.12,.43),action=phase(p,.65,.88);
    scene.querySelectorAll('.case-paper').forEach((paper,i)=>{
-    paper.style.transform=`translate(${(i===0?100:-100)*analysis}px,${25*analysis}px)`;
+    paper.style.transform=`translate(${(i===0?-35:35)+(i===0?135:-135)*analysis}px,${25*analysis}px)`;
     paper.style.opacity=1-phase(p,.25,.43);
    });
    scene.querySelector('.case-folder').style.transform=`translateX(${-85*analysis}px)`;
