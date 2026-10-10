@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 550" fill="none"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(22)"><path d="M0 0v6" stroke="#dfd8c2" stroke-width=".6" opacity=".45"/></pattern><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0v28" stroke="#dfd8c2" stroke-width=".6" opacity=".1"/></pattern><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".68" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs>
+<rect width="620" height="550" fill="#243229"/><rect width="620" height="550" fill="url(#grid)"/><rect width="620" height="550" filter="url(#grain)" opacity=".055"/>
+<g stroke="#dfd8c2" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M52 50h20m-10-10v20M548 490h20m-10-10v20" opacity=".4"/>
+<path d="M141 326c60-31 124-24 168 8 49-38 111-54 173-34v113c-68-14-121 0-173 35-51-32-110-37-168-11V326Z" fill="#354438"/>
+<path d="M141 420c58-26 117-21 168 11 52-35 105-49 173-35v17c-68-14-121 0-173 35-51-32-110-37-168-11v-17Z" fill="url(#hatch)"/>
+<path d="M147 324c59-30 119-20 162 10 49-38 108-52 166-35v97c-62-14-115 0-166 35-50-31-106-37-162-11v-96Z" fill="#243229"/>
+<path d="M309 334v97m-162-15c54-24 111-16 161 16m3-3c49-33 102-48 164-36"/>
+<path d="M154 410c49-20 101-14 147 12M155 404c49-20 101-14 146 12m18 0c47-29 97-43 148-30m-148 24c47-29 97-43 148-30" opacity=".6"/>
+<path d="M168 347c41-12 76-6 112 13m-112 2c41-12 76-6 112 13m-112 2c41-12 76-6 112 13m-112 2c41-12 76-6 112 13" opacity=".55"/>
+<path d="M334 340c38-22 73-29 111-22m-111 15c38-22 73-29 111-22m-111 30c38-22 73-29 111-22m-111 30c38-22 73-29 111-22" opacity=".55"/>
+<path d="M185 215c43-21 80-17 124 7 42-29 89-36 131-25v78c-42-11-89-4-131 25-44-24-81-28-124-7v-78Z" fill="#243229"/>
+<path d="M185 286c43-21 80-17 124 7 42-29 89-36 131-25v7c-42-11-89-4-131 25-44-24-81-28-124-7v-7Z" fill="url(#hatch)"/>
+<path d="M309 222v78M204 234c27-6 50-3 77 11m-77 0c27-6 50-3 77 11m-77 0c27-6 50-3 77 11"/>
+<path d="M332 230c27-14 53-19 83-14m-83 27c27-14 53-19 83-14m-83 27c27-14 53-19 83-14"/>
+<path d="M309 317v-10m0-94v-15" stroke-dasharray="2 5" opacity=".5"/>
+<path d="m227 119 156-24 39 64-156 24Z" fill="#243229"/>
+<path d="m227 119 156-24 39 64-156 24-39-64Z" opacity=".5" transform="translate(2 3)"/>
+<path d="m238 136 154-23M267 169l140-23" opacity=".6"/>
+<path d="m307 123 5 26 28-17Z" stroke="#b1c59a" stroke-width="2"/>
+<path d="M269 195v-8m104 7v-11" stroke-dasharray="2 5" opacity=".5"/>
+<path d="M203 447v24H99M151 247H83v-35M422 115h70V78" stroke="#b1c59a" stroke-width="1"/>
+<circle cx="203" cy="447" r="3" fill="#b1c59a"/><circle cx="151" cy="247" r="3" fill="#b1c59a"/><circle cx="422" cy="115" r="3" fill="#b1c59a"/>
+<path d="M102 330v105m-4-105h8m-8 105h8M154 497h327m-327-4v8m327-8v8" stroke-width=".7" opacity=".5"/>
+<path d="M309 461v-17m-8 17h16" stroke-width=".7" opacity=".5"/>
+</g><g font-family="Arial,Helvetica,sans-serif" fill="#dfd8c2"><text x="55" y="87" font-size="10" letter-spacing="2">ISONOMY ACADEMY / CUADERNO 01</text><text x="466" y="65" font-size="12">01 / LECCIÓN</text><text x="48" y="198" font-size="12">02 / LECTURA</text><text x="45" y="491" font-size="12">03 / APUNTES</text><text x="285" y="520" font-size="9" letter-spacing="1.5">ESTUDIAR · RELACIONAR · COMPRENDER</text></g></svg>
