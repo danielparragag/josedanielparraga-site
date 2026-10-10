@@ -1,0 +1,11 @@
+/* Five destinations; collapse before the corporate lockups and links collide. */
+@media(min-width:1151px) and (max-width:1420px){
+body:not(.page-personal) nav{flex-wrap:nowrap}
+body:not(.page-personal) nav .menu-toggle{display:flex;flex-direction:column;gap:6px;justify-content:center;align-items:center;width:42px;height:42px;background:transparent;border:1px solid var(--line);border-radius:50%;color:var(--ink);margin-left:auto;flex-shrink:0}
+body:not(.page-personal) .menu-toggle span{display:block;width:17px;height:1px;background:currentColor}
+body:not(.page-personal) nav .links>a:not(.button){display:none}
+body:not(.page-personal) nav.menu-open .links{position:absolute;top:100%;left:0;right:0;padding:22px 7%;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:22px}
+body:not(.page-personal) nav.menu-open .links>a:not(.button){display:block;font-size:15px}
+}
+@media(min-width:1421px){body:not(.page-personal) nav .links{gap:16px;font-size:11px}}
+@media(max-width:650px){body:not(.page-personal) nav.menu-open .links{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;padding:20px 7%}body:not(.page-personal) nav.menu-open .links>a{min-height:44px;display:flex!important;align-items:center;line-height:1.4}body:not(.page-personal) nav.menu-open .links>.button{max-width:none;font-size:12px;grid-column:1/-1;justify-self:start}}
